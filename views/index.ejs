@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon/favicon.png">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Country index</title>
+</head>
+<body>
+    <header>
+        <h1 class="no-select">Country index</h1>
+    </header>
+    <main>
+        <div class="request-country">
+            <form action="/receiveCountry" method="post">
+                <select name="name" id="country-select" class="no-select">
+                    <option value="noCountry" disabled selected>Select country</option>
+                    <% countries.forEach((elem, i, arr)=>{ %>
+                        <option value="<%= arr[i] %>"><%= arr[i] %></option>
+                    <% }); %>
+                </select>
+                <input class="go-div no-select go" value="Go" type="submit">
+            </form>
+        </div>
+        <center><hr class="seperate-categories"></center>
+        
+        <% if(check){ %>
+            <div class="center country-info-holder">
+                <div class="center">
+                    <h1 style="margin-top: 10px; font-size: 2.5rem;"><%= common %></h1>
+                </div>
+                <div>
+                    <h2 class="image-header-and-under">Flag:</h2>
+                    <div class="center">
+                        <img src="<%= flag %>" alt="<%= common %> flag image" class="image">
+                    </div>
+                </div>
+                <div>
+                    <h2 class="image-header-and-under">Coats of arms:</h2>
+                    <div class="center">
+                        <img src="<%= coatsofarms %>" alt="<%= common %> flag image" class="image coats_of_arms">
+                        <p style="font-size: 0.8rem;">Coats of arms are unique symbols used to identify individuals, families, or even countries.</p>
+                    </div>
+                </div>
+                <div class="general-info">
+                    <h2 class="image-header-and-under"><%= common %> lies in: </h2><h2 class="image-header-and-under"><%= continent %></h2>
+                    <h2>Capital:</h2><h2><%= capital %></h2>
+                    <h2>Language(s):</h2><h3>
+                        <ul>
+                            <% language.forEach(elem => { %>
+
+                                <li><%= elem %></li>
+
+                            <% }) %>
+                        </ul>
+                    </h2>
+                    <h2>Population(most likely outdated): </h2><h2><%= population %></h2>
+                    <h2>Timezone(s):</h2><h3>
+                        <ul>
+                            <% timezone.forEach(elem=>{ %>
+                                <li><%= elem %></li>
+                            <% }) %>
+                        </ul>
+                    </h3>
+                    <h2><% if(currencyNames.length>1){ %>Currencies:<% }else{ %>Currency:<% } %></h2><h3>
+                        <ul>
+                            <% currencyNames.forEach((elem, i, arr)=>{ %>
+
+                                <li <% if(i>0){ %>style="margin-top: 10px;"<% } %>>
+                                    <%= elem %>
+                                    <ul>
+                                        <li>
+                                            name: <%= currency[i].name %>
+                                        </li>
+                                        <li>
+                                            symbol: <%= currency[i].symbol %>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            <% }) %>
+                        </ul>
+                    </h3>
+                    <h2>Car drive side:</h2><h2><%= carDriveSide %></h2>
+                    <h2><%= common %> male called:</h2><h2><%= maleCalled %></h2>
+                    <h2><%= common %> female called:</h2><h2><%= femaleCalled %></h2>
+                </div>
+
+            </div>
+        <% } %>
+    </main>
+    <footer>
+        <a href="" style="margin-top: 10px;">Source code(github)</a>
+        <a href="">API used to get country data</a>
+    </footer>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
